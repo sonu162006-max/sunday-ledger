@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  ADMIN
+  VIEWER
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(VIEWER)
+  createdAt    DateTime @default(now())
+}
+
+model Worker {
+  id                String             @id @default(cuid())
+  name              String
+  monthlySalary     Decimal            @db.Decimal(12, 2)
+  joinDate          DateTime
+  isActive          Boolean            @default(true)
+  createdAt         DateTime           @default(now())
+  attendance        Attendance[]
+  salaryReportLines SalaryReportLine[]
+
+  @@index([name])
+  @@index([isActive])
+  @@index([createdAt])
+}
+
+model Attendance {
+  id       String           @id @default(cuid())
+  workerId String
+  date     DateTime         @db.Date
+  status   AttendanceStatus
+  worker   Worker           @relation(fields: [workerId], references: [id], onDelete: Cascade)
+
+  @@unique([workerId, date])
+  @@index([date])
+}
+
+model Holiday {
+  id   String   @id @default(cuid())
+  date DateTime @unique @db.Date
+  name String
+}
+
+model SalaryReport {
+  id           String             @id @default(cuid())
+  month        String             // e.g. "2026-09"
+  generatedAt  DateTime           @default(now())
+  totalPayroll Decimal            @db.Decimal(14, 2)
+  lines        SalaryReportLine[]
+
+  @@index([month])
+}
+
+model SalaryReportLine {
+  id             String       @id @default(cuid())
+  salaryReportId String
+  workerId       String
+  presentDays    Int
+  paidSundays    Int
+  paidHolidays   Int
+  totalPaidDays  Int
+  salaryAmount   Decimal      @db.Decimal(12, 2)
+
+  salaryReport   SalaryReport @relation(fields: [salaryReportId], references: [id], onDelete: Cascade)
+  worker         Worker       @relation(fields: [workerId], references: [id], onDelete: Cascade)
+
+  @@index([workerId])
+}

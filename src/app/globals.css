@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Roboto+Slab:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #F6F5F1;
+  --paper-panel: #EFECE4;
+  --paper-inset: #E6E2D6;
+  --hairline: #D5CEBD;
+  --hairline-strong: #B8AE97;
+  --ink: #1C2321;
+  --ink-muted: #5E6660;
+  --ink-faint: #8E968F;
+  --pine: #1B3A34;
+  --pine-deep: #132B26;
+  --pine-light: #2A544B;
+  --gold: #B9862D;
+  --gold-soft: #D9A84E;
+  --gold-bg: #F7EEDB;
+  --brick: #A23E2E;
+  --brick-soft: #F6DFDC;
+  --olive: #4B6D53;
+  --olive-soft: #E0EADE;
+}
+
+body {
+  color: var(--ink);
+  background-color: var(--paper);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: 'Roboto Slab', Georgia, serif;
+}
+
+/* -------------------------------------------------------------
+   Authentic Ledger Component Styles (Sharp 3px corners, no shadows)
+------------------------------------------------------------- */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 3px;
+  border: 1px solid var(--pine);
+  background: var(--pine);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  box-shadow: none;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--pine-light);
+  border-color: var(--pine-light);
+}
+
+.btn.secondary {
+  background: #FFFFFF;
+  color: var(--ink);
+  border-color: var(--hairline-strong);
+}
+
+.btn.secondary:hover:not(:disabled) {
+  background: var(--paper-panel);
+  border-color: var(--ink-muted);
+}
+
+.btn.danger {
+  background: var(--brick);
+  border-color: var(--brick);
+  color: #FFFFFF;
+}
+
+.btn.danger:hover:not(:disabled) {
+  background: #872e20;
+  border-color: #872e20;
+}
+
+.btn.sm {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Inputs & Form Controls */
+.input, .select {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.8125rem;
+  padding: 0.45rem 0.75rem;
+  background: #FFFFFF;
+  color: var(--ink);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 3px;
+  outline: none;
+  box-shadow: none;
+  transition: border-color 0.15s ease;
+}
+
+.input:focus, .select:focus {
+  border-color: var(--pine);
+}
+
+.input:disabled, .select:disabled {
+  background: var(--paper-inset);
+  color: var(--ink-faint);
+  cursor: not-allowed;
+}
+
+/* Panels (Sharp 3px corners, Hairline border, No shadow) */
+.panel {
+  background: #FFFFFF;
+  border: 1px solid var(--hairline);
+  border-radius: 3px;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 0.875rem 1.25rem;
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.panel-title {
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.panel-body {
+  padding: 1.25rem;
+}
+
+/* Stat Cards (Sharp 3px corners, Hairline border, No shadow) */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  background: #FFFFFF;
+  border: 1px solid var(--hairline);
+  border-radius: 3px;
+  padding: 1.125rem 1.25rem;
+  box-shadow: none !important;
+}
+
+.stat .label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+}
+
+.stat .value {
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.stat .sub {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  margin-top: 0.35rem;
+}
+
+/* Pills / Badges */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.pill.green {
+  background: var(--olive-soft);
+  color: var(--olive);
+}
+
+.pill.red {
+  background: var(--brick-soft);
+  color: var(--brick);
+}
+
+.pill.gold {
+  background: var(--gold-bg);
+  color: var(--gold);
+}
+
+.pill.muted {
+  background: var(--paper-panel);
+  color: var(--ink-muted);
+}
+
+.pill.pine {
+  background: rgba(27, 58, 52, 0.1);
+  color: var(--pine);
+}
+
+/* Notes / Alert Banners */
+.note {
+  background: var(--gold-bg);
+  border-left: 3px solid var(--gold);
+  padding: 0.875rem 1.125rem;
+  border-radius: 0 3px 3px 0;
+  color: #5C4010;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  box-shadow: none !important;
+}
+
+.note.info {
+  background: var(--paper-panel);
+  border-left-color: var(--pine);
+  color: var(--ink);
+}
+
+/* Ledger Tables */
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.ledger-table th {
+  text-align: left;
+  padding: 0.625rem 0.875rem;
+  background: var(--paper-panel);
+  border-bottom: 1px solid var(--hairline-strong);
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.ledger-table td {
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--ink);
+  vertical-align: middle;
+}
+
+.ledger-table tr:hover td {
+  background: rgba(27, 58, 52, 0.02);
+}
+
+.ledger-table tfoot td {
+  background: var(--paper);
+  font-weight: 600;
+  border-top: 2px solid var(--hairline-strong);
+  border-bottom: none;
+}
+
+/* Attendance Matrix Table */
+.att-container {
+  overflow-x: auto;
+  border: 1px solid var(--hairline);
+  border-radius: 3px;
+  background: #FFFFFF;
+  box-shadow: none !important;
+}
+
+.att-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.att-table th, .att-table td {
+  border-right: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  text-align: center;
+  padding: 0.35rem 0.25rem;
+}
+
+.att-table th.sticky-col, .att-table td.sticky-col {
+  position: sticky;
+  left: 0;
+  background: #FFFFFF;
+  z-index: 2;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  min-width: 160px;
+  font-weight: 500;
+}
+
+.att-table th.sticky-col {
+  background: var(--paper-panel);
+  z-index: 3;
+}
+
+.att-table th.dow-sun, .att-table td.dow-sun {
+  background-color: rgba(185, 134, 45, 0.08);
+}
+
+.att-table th.dow-hol, .att-table td.dow-hol {
+  background-color: var(--gold-bg);
+}
+
+/* Attendance toggle button cell */
+.day-cell-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  user-select: none;
+}
+
+.day-cell-btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.day-cell-btn.present {
+  background: var(--olive-soft);
+  color: var(--olive);
+  border: 1px solid rgba(75, 109, 83, 0.4);
+}
+
+.day-cell-btn.absent {
+  background: var(--brick-soft);
+  color: var(--brick);
+  border: 1px solid rgba(162, 62, 46, 0.4);
+}
+
+.day-cell-btn.holiday {
+  background: var(--gold-bg);
+  color: var(--gold);
+  border: 1px solid rgba(185, 134, 45, 0.4);
+}
+
+/* Sunday Cells: Paid (Gold) vs Unpaid (Brick Red) */
+.day-cell-btn.sunday {
+  cursor: default;
+}
+
+.day-cell-btn.sunday.paid {
+  background: rgba(185, 134, 45, 0.15);
+  color: #7D5716;
+  border: 1px dashed rgba(185, 134, 45, 0.7);
+}
+
+.day-cell-btn.sunday.unpaid {
+  background: var(--brick-soft);
+  color: var(--brick);
+  border: 1px dashed rgba(162, 62, 46, 0.75);
+}
+
+.day-cell-btn:disabled {
+  cursor: default;
+}
